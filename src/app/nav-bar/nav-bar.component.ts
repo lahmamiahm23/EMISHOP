@@ -2,7 +2,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthentificationService } from '../services/authentification.service';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Produit } from '../../Modeles/produit';
 import { ProductAPI } from '../../Modeles/product-api';
@@ -40,30 +40,14 @@ export class NavBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(
-      (data: any) => {
-        this.productsAPI = data.products;
-        this.products = this.productsAPI.map((p: ProductAPI) => new Produit(
-          p.id, p.title, p.images[0], p.price, p.category, 
-          p.description, p.stock
-        ));
-        this.allProducts = [...this.products];
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
-    this.categoryService.getAllCategories().subscribe(data => {
+    // Récupérer les catégories au démarrage
+    this.categoryService.getAllCategories().subscribe((data: any) => {
       this.categories = data;
+    }, error => {
+      console.log(error);
     });
 
-    this.shareDataService.selectedCategory$.subscribe(category => {
-      if (category) {
-        this.onCategorySelected(category);
-      }
-    });
-
+    // Gérer les mots-clés de recherche via le service partagé
     this.shareDataService.searchKeyword$.subscribe(data => {
       this.searchKey = data;
       if (this.searchKey && this.searchKey.trim() !== '') {
@@ -92,30 +76,12 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  onCategorySelected(category: string | null) {
-    
-    this.selectedCategory = category;
-    if (!this.selectedCategory || this.selectedCategory === 'All') {
-      this.products = [...this.allProducts];
-      return;
-    }
-
-    this.categorySelected.emit(this.selectedCategory);
-    
-    this.productService.getProductsByCategory(this.selectedCategory).subscribe(
-      (data: any) => {
-        this.products = data.products.map((p: ProductAPI) => new Produit(
-          p.id, p.title, p.images[0], p.price, p.category, 
-          p.description, p.stock
-        ));
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  onSelectCategory(category: string) {
+    this.categorySelected.emit(category);
+    this.shareDataService.setSelectedCategory(category);
   }
 }

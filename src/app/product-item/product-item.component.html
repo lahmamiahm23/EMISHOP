@@ -1,5 +1,5 @@
-<div class="card" style="width: 100%;" >
-  <img [src]="produit.url" class="card-img-top" [alt]="produit.nom" (click)="onClickProduct(produit)">
+<div class="card" style="width: 100%;">
+  <img [src]="produit.url" class="card-img-top" [alt]="produit.nom" (click)="onClickProduct()">
   <div class="card-body">
     <span [ngStyle]="{ color: getColor(produit.stock) }">{{ getState(produit.stock) }}</span>
     <h5 class="card-title">{{ produit.nom }}</h5>

@@ -7,30 +7,35 @@ import { NgIf } from '@angular/common';
 import { ProductDetailsService } from '../services/product-details.service';
 import { PanierService } from '../services/panier.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-product-item',
   standalone: true,
-  imports: [NgStyle , NgIf],
+  imports: [NgStyle, NgIf],
   templateUrl: './product-item.component.html',
-  styleUrl: './product-item.component.scss'
+  styleUrls: ['./product-item.component.scss'] // Corrected from styleUrl to styleUrls
 })
 export class ProductItemComponent {
-  constructor(private panierService:PanierService,private productDetailsService:ProductDetailsService,private router:Router) {
-  }
-  @Input() produit! : Produit;
-  @Output() selectedProduct = new EventEmitter<Produit>;
+  constructor(private panierService: PanierService, private productDetailsService: ProductDetailsService, private router: Router) {}
 
-  addToCart(){
+  @Input() produit!: Produit;
+  @Output() selectedProduct = new EventEmitter<Produit>();
+
+  addToCart() {
     this.selectedProduct.emit(this.produit);
   }
-  getState(stock:number):String{
+
+  getState(stock: number): string {
     return stock > 0 ? "en stock" : "en rupture de stock";
   }
-  getColor(stock:number):String{
+
+  getColor(stock: number): string {
     return stock > 0 ? "green" : "red"; 
   }
-  onClickProduct(product: Produit) {
-    this.productDetailsService.setClickedProduct(product);
+
+  onClickProduct() {
+    // Émettre le produit cliqué
+    this.productDetailsService.setSelectedProduct(this.produit);
     this.router.navigate(['/product-details']);
   }
 }

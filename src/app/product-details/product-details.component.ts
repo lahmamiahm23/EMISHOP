@@ -1,43 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import {CurrencyPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import { Produit } from '../../Modeles/produit';
 import { ProductDetailsService } from '../services/product-details.service';
-import { AuthentificationService } from '../services/authentification.service';
-import {Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-product-details',
   standalone: true,
-  imports: [NgIf,CurrencyPipe,NgForOf,NgClass],
+  imports: [CommonModule],
+  selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css'] 
+  styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-  product!: Produit | null; // Use of non-null assertion is acceptable, but consider initialization
-  mainImage!: string; // To hold the main image URL
+  product!: Produit;
+  mainImage: string = '';
 
-  constructor(private productDetailsService: ProductDetailsService) { }
+  constructor(
+    private productDetailsService: ProductDetailsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.getClickedProduct();
+    this.loadProductDetails();
   }
 
-  getClickedProduct(): void {
-    this.productDetailsService.clickedProduct$.subscribe(data => {
-      this.product = data;
-      if (this.product) {
-        this.mainImage = this.product.url; // Initialize main image
+  private loadProductDetails(): void {
+    const productId = this.route.snapshot.paramMap.get('id');
+    if (productId) {
+      this.getProductDetails(productId);
+    }
+  }
+
+  private getProductDetails(id: string): void {
+    this.productDetailsService.getProductById(id).subscribe(
+      (data: Produit) => {
+        this.product = data;
+        this.mainImage = this.product.url[0]; // Set the first image as the main image
+      },
+      (error) => {
+        console.error('Error fetching product details:', error);
       }
-    });
+    );
   }
 
   setMainImage(image: string): void {
-    this.mainImage = image; // Method to change the main image
+    this.mainImage = image; // Change main image when an additional image is clicked
   }
 
   addToCart(): void {
+    // Logic to add the product to the cart
     console.log('Product added to cart:', this.product);
   }
-
-
 }

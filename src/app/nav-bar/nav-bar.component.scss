@@ -29,3 +29,19 @@
   background-color: #007bff; /* Change background on hover */
   color: white; /* Change text color on hover */
 }
+.form-select {
+  border-radius: 5px; /* Arrondir légèrement les coins */
+  border: 1px solid #ced4da; /* Bordure légère */
+  padding: 8px 12px; /* Espacement interne pour un meilleur confort */
+  background-color: #f8f9fa; /* Couleur de fond claire */
+  font-size: 16px; /* Taille de texte confortable */
+  color: #495057; /* Couleur du texte */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transition douce pour hover et focus */
+}
+
+/* Changement visuel lors du focus */
+.form-select:focus {
+  border-color: #80bdff; /* Bordure bleue au focus */
+  outline: none; /* Retire le contour par défaut */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25); /* Ajout d'une ombre légère au focus */
+}

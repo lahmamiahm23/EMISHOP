@@ -20,34 +20,24 @@
         </li>
       </ul>
 
-      
+      <!-- Dropdown pour sélectionner les catégories -->
+      <div class="nav-item mx-2">
+        <select aria-label="Categories" class="form-select" [(ngModel)]="selectedCategory" (ngModelChange)="onSelectCategory($event)">
+          <option value="All">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
 
-            <!-- Category Dropdown -->
-            <div class="dropdown ml-5">
-              <i class="bi bi-filter-right" >
-              <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Categories
-              </button>
-              <ul class="dropdown-menu">
-                <li *ngFor="let category of categories">
-                  <a class="dropdown-item" (click)="this.onCategorySelected(category)">{{ category }}</a>
-                </li>
-              </ul>
-            </i>
-            </div>
-      
-      
       <!-- Search Container -->
       <div class="search-container mx-2">
         <input 
-          (ngModelChange)="onSearchByKey()" 
           [(ngModel)]="searchKey" 
           type="text" 
           class="search-click" 
           placeholder="Search here..." 
           [ngClass]="{'active': isSearchActive}" 
         />
-        <button class="btn btn-primary" (click)="onSearchByKey()">Chercher</button>
+        <button class="btn btn-primary" (click)="onSearchByKey()">Search</button>
         <i class="panier fa-sharp fa-solid fa-magnifying-glass" (click)="toggleSearch()"></i>
       </div>
 
@@ -59,7 +49,7 @@
           </a>
         </li>
         <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="isAuthenticated()">
-          <a class="nav-link cursor-pointer" routerLink="home" (click)="logout()">
+          <a class="nav-link cursor-pointer" (click)="logout()">
             <i class="fas fa-sign-out-alt fa-lg mb-1"></i> Logout
           </a>
         </li>

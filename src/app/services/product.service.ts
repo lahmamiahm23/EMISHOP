@@ -20,7 +20,7 @@ export class ProductService {
     return this.http.get(`https://dummyjson.com/products/search?q=${text}`);
   }
 
-  getProductsByCategory(category: string): Observable<any> {
+  getProduitByCategory(category: string): Observable<any> {
     return this.http.get(`https://dummyjson.com/products/category/${category}`);
   }
 }
