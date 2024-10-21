@@ -1,0 +1,108 @@
+<!-- payment.component.html -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Payment</h2>
+          <form (ngSubmit)="onPay()">
+            <!-- Payment Method Selection -->
+            <div class="mb-3">
+              <label class="form-label">Select Payment Method:</label>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="creditCard"
+                  name="paymentMethod"
+                  [(ngModel)]="paymentMethod"
+                  value="creditCard"
+                  required
+                />
+                <label class="form-check-label" for="creditCard">Credit Card</label>
+              </div>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="paypal"
+                  name="paymentMethod"
+                  [(ngModel)]="paymentMethod"
+                  value="paypal"
+                  required
+                />
+                <label class="form-check-label" for="paypal">PayPal</label>
+              </div>
+            </div>
+
+            <!-- Credit Card Payment Form -->
+            <div *ngIf="paymentMethod === 'creditCard'" class="credit-card-form">
+              <h5 class="mb-3">Credit Card Details</h5>
+              <div class="mb-3">
+                <label for="cardNumber" class="form-label">Card Number:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cardNumber"
+                  [(ngModel)]="cardNumber"
+                  name="cardNumber"
+                  placeholder="Enter your card number"
+                  required
+                />
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="expiryDate" class="form-label">Expiry Date:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="expiryDate"
+                    [(ngModel)]="expiryDate"
+                    name="expiryDate"
+                    placeholder="MM/YY"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="cvv" class="form-label">CVV:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cvv"
+                    [(ngModel)]="cvv"
+                    name="cvv"
+                    placeholder="CVV"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="cardHolderName" class="form-label">Cardholder's Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cardHolderName"
+                  [(ngModel)]="cardHolderName"
+                  name="cardHolderName"
+                  placeholder="Enter the name on the card"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- PayPal Payment Section -->
+            <div *ngIf="paymentMethod === 'paypal'" class="paypal-form">
+              <h5 class="mb-3">PayPal Payment</h5>
+              <p class="text-muted">You will be redirected to PayPal to complete your payment.</p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-block">Proceed to Pay</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

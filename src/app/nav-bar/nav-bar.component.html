@@ -1,0 +1,70 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark gradient-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">EMISHOP</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars text-light"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link active" aria-current="page" routerLink="/home">
+            <i class="fas fa-home fa-lg mb-1"></i> Home
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link active cursor-pointer" (click)="afficherPanier()">
+            <i class="fas fa-shopping-cart fa-lg mb-1"></i> Panier
+          </a>
+        </li>
+      </ul>
+
+      
+
+            <!-- Category Dropdown -->
+            <div class="dropdown ml-5">
+              <i class="bi bi-filter-right" >
+              <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </button>
+              <ul class="dropdown-menu">
+                <li *ngFor="let category of categories">
+                  <a class="dropdown-item" (click)="this.onCategorySelected(category)">{{ category }}</a>
+                </li>
+              </ul>
+            </i>
+            </div>
+      
+      
+      <!-- Search Container -->
+      <div class="search-container mx-2">
+        <input 
+          (ngModelChange)="onSearchByKey()" 
+          [(ngModel)]="searchKey" 
+          type="text" 
+          class="search-click" 
+          placeholder="Search here..." 
+          [ngClass]="{'active': isSearchActive}" 
+        />
+        <button class="btn btn-primary" (click)="onSearchByKey()">Chercher</button>
+        <i class="panier fa-sharp fa-solid fa-magnifying-glass" (click)="toggleSearch()"></i>
+      </div>
+
+      <!-- Right side: Login/Logout -->
+      <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
+        <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="!isAuthenticated()">
+          <a class="nav-link" routerLink="/login">
+            <i class="fas fa-sign-in-alt fa-lg mb-1"></i> Login
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="isAuthenticated()">
+          <a class="nav-link cursor-pointer" routerLink="home" (click)="logout()">
+            <i class="fas fa-sign-out-alt fa-lg mb-1"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->

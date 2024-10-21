@@ -1,0 +1,30 @@
+<div class="container mt-3">
+    <div class="col-md-6 offset-3">
+      <div class="card">
+        <div class="card-header">Authentification</div>
+        <div class="card-body">
+          <!-- Message d'erreur stylé -->
+          <div *ngIf="errormessage" class="alert alert-danger">{{ errormessage }}</div>
+          <!-- Formulaire réactif -->
+          <form [formGroup]="userFormGroup" (ngSubmit)="handleLogin()">
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" formControlName="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" formControlName="password" class="form-control" required>
+            </div>
+            <div>
+              <!-- Désactiver le bouton si le formulaire est invalide -->
+              <button class="btn btn-primary" type="submit" [disabled]="userFormGroup.invalid">Login</button>
+            </div>
+          </form>
+          <div class="text-center mt-3">
+            <p class="mb-0">Don't have an account? <a routerLink="/signup">Sign Up</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

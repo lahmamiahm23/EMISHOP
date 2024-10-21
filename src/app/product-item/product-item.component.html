@@ -1,0 +1,13 @@
+<div class="card" style="width: 100%;" >
+  <img [src]="produit.url" class="card-img-top" [alt]="produit.nom" (click)="onClickProduct(produit)">
+  <div class="card-body">
+    <span [ngStyle]="{ color: getColor(produit.stock) }">{{ getState(produit.stock) }}</span>
+    <h5 class="card-title">{{ produit.nom }}</h5>
+    <p class="card-text">Price: <strong>{{ produit.prix }} USD</strong></p>
+    <p class="card-text">Category: {{ produit.categorie }}</p>
+    <p class="card-text">{{ produit.description }}</p>
+  </div>
+  <div class="card-footer">
+    <button *ngIf="produit.stock > 0" class="btn btn-primary" (click)="addToCart()">Ajouter au panier</button>
+  </div>
+</div>

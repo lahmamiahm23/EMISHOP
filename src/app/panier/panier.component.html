@@ -1,0 +1,24 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Désignation</th>
+        <th>Prix (USD)</th>
+        <th>Quantité</th>
+        <th>Totale (USD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of detailsPanier">
+        <td>{{ item.produit.description }}</td>
+        <td class="price">{{ item.produit.prix }}</td>
+        <td class="quantity-input">{{ item.qte }}</td>
+        <td class="total">{{ item.qte * item.produit.prix}}</td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="3" style="text-align: right;">Total :</td>
+        <td>{{totalPrice  }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

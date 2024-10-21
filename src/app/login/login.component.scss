@@ -1,0 +1,35 @@
+
+
+.card {
+  
+  .card-header {
+    background-color: #007bff; // Couleur du header
+    color: white; // Couleur du texte
+    text-align: center; // Centrer le texte
+    font-weight: bold; // Mettre le texte en gras
+    padding: 15px; // Ajouter du padding
+    border-radius: 10px 10px 0 0; // Arrondir uniquement les coins du haut
+  }
+
+  .card-body {
+    padding: 20px; // Ajouter du padding pour le contenu
+  }
+
+  .alert {
+    margin-bottom: 15px; // Espacement sous l'alerte
+  }
+
+  .form-label {
+    font-weight: bold; // Labels en gras
+  }
+
+  .btn {
+    width: 100%; // Largeur du bouton égale à celle de la carte
+    margin-top: 10px; // Espacement au-dessus du bouton
+    transition: background-color 0.3s; // Transition douce pour l'effet de survol
+
+    &:hover {
+      background-color: #0056b3; // Changement de couleur au survol
+    }
+  }
+}
