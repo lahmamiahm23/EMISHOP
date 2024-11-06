@@ -1,47 +1,79 @@
-.btn {
-  padding: .45rem 1.5rem .35rem;
-}
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+  // Brand styles
+  .navbar-brand {
+    display: flex;
+    align-items: center;
 
-.gradient-custom {
-  /* fallback for old browsers */
-  background: #000000;
+    img {
+      margin-right: 10px;
+      transition: transform 0.3s;
+    }
 
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgb(33, 31, 31), rgb(35, 31, 35));
+    &:hover img {
+      transform: scale(1.05);
+    }
 
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgb(36, 32, 32), rgb(34, 31, 31))
-}
+    span {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #fff; // White color for text
+    }
+  }
 
-.categories-container {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f9fa;
-}
+  // Nav links styles
+  .nav-link {
+    transition: color 0.3s, background-color 0.3s;
 
-.btn-outline-primary {
-  display: flex;
-  align-items: center; /* Center icon and text vertically */
-}
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff; // Keep text color white on hover
+    }
+  }
 
-.btn-outline-primary:hover {
-  background-color: #007bff; /* Change background on hover */
-  color: white; /* Change text color on hover */
-}
-.form-select {
-  border-radius: 5px; /* Arrondir légèrement les coins */
-  border: 1px solid #ced4da; /* Bordure légère */
-  padding: 8px 12px; /* Espacement interne pour un meilleur confort */
-  background-color: #f8f9fa; /* Couleur de fond claire */
-  font-size: 16px; /* Taille de texte confortable */
-  color: #495057; /* Couleur du texte */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transition douce pour hover et focus */
-}
+  // Active link styles
+  .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
 
-/* Changement visuel lors du focus */
-.form-select:focus {
-  border-color: #80bdff; /* Bordure bleue au focus */
-  outline: none; /* Retire le contour par défaut */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25); /* Ajout d'une ombre légère au focus */
+  // Dropdown select styles
+  .category-select {
+    border-radius: 0.5rem;
+    background-color: #007bff; // Blue background
+    color: #fff; // White text
+    border: none; // Remove border
+
+    &:focus {
+      border-color: #28a745; // Green border on focus
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+  }
+
+  // Search input styles
+  .search-input {
+    border-radius: 0.5rem;
+    border: 1px solid #dc3545; // Red border
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #28a745; // Green border on focus
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+  }
+
+  // Search button styles
+  .search-button {
+    border-radius: 0.5rem;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #dc3545; // Red background on hover
+      color: #fff; // White text on hover
+    }
+  }
 }

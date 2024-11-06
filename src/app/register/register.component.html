@@ -1,0 +1,28 @@
+<h1 class="text-center">Register</h1>
+
+<div *ngIf="errorMessage" class="error-message">
+  <i class="bi bi-exclamation-circle"></i> {{ errorMessage }}
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="registration-form">
+  <div class="input-group">
+    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+    <input type="text" placeholder="Username" formControlName="username" class="form-control" />
+  </div>
+  <div class="input-group">
+    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+    <input type="text" placeholder="Email" formControlName="email" class="form-control" />
+  </div>
+  <div class="input-group">
+    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+    <input type="password" placeholder="Password" formControlName="password" class="form-control" />
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </div>
+</form>
+
+<!-- Link to Login -->
+<div class="text-center mt-3">
+  <p>You have an account? <a routerLink="/login" class="text-primary">Login here</a></p>
+</div>

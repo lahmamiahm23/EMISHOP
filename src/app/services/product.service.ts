@@ -19,8 +19,14 @@ export class ProductService {
   getProductByKey(text: string): Observable<any> {
     return this.http.get(`https://dummyjson.com/products/search?q=${text}`);
   }
-
-  getProduitByCategory(category: string): Observable<any> {
+getProduitByCategory(category: string): Observable<any> {
     return this.http.get(`https://dummyjson.com/products/category/${category}`);
+  
+  }
+  searchProductsByKey(key: string | null){
+    return this.http.get("https://dummyjson.com/products/search?q=$"+key);
+  }
+  getProductByID(id:number){
+    return this.http.get("https://dummyjson.com/products/"+id);
   }
 }

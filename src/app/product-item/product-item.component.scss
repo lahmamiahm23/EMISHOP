@@ -1,0 +1,152 @@
+// Variables for colors
+$blue: #007bff; // Bootstrap primary blue
+$green: #28a745; // Bootstrap success green
+$red: #dc3545; // Bootstrap danger red
+$gray-light: #f8f9fa; // Light gray for backgrounds
+$gray-dark: #343a40; // Dark gray for text
+$border-radius: 0.5rem; // Standard border radius for cards
+
+// Card styling
+.card {
+  border: 1px solid $gray-light; // Light border for the card
+  border-radius: $border-radius; // Rounded corners for the card
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Shadow effect for depth
+  transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth transition for hover effect
+
+  &:hover {
+    transform: translateY(-2px); // Slight lift on hover
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Deeper shadow on hover
+  }
+
+  // Card image
+  .card-img-top {
+    border-top-left-radius: $border-radius; // Rounded corners for the top image
+    border-top-right-radius: $border-radius; // Rounded corners for the top image
+    object-fit: cover; // Cover image without distortion
+    height: 200px; // Fixed height for uniformity
+    cursor: pointer; // Pointer cursor for image click
+    transition: transform 0.2s; // Image scaling effect
+
+    &:hover {
+      transform: scale(1.05); // Slightly scale image on hover
+    }
+  }
+
+  // Card body styling
+  .card-body {
+    display: flex;
+    flex-direction: column; // Column layout for card body
+    justify-content: flex-start; // Align items to the start
+    padding: 1rem; // Padding for card body
+
+    // Stock status span
+    span {
+      font-size: 1rem; // Font size for stock status
+      margin-bottom: 0.5rem; // Space below stock status
+      display: flex; // Flex layout for icon and text
+      align-items: center; // Align icon and text vertically
+
+      i {
+        margin-right: 0.5rem; // Space between icon and text
+      }
+    }
+
+    // Card title
+    h5.card-title {
+      font-weight: bold; // Bold title
+      font-size: 1.25rem; // Title font size
+      margin-bottom: 0.5rem; // Space below title
+      color: $blue; // Title color
+    }
+
+    // Card text styling
+    .card-text {
+      margin: 0.25rem 0; // Space for text paragraphs
+      color: $gray-dark; // Dark gray color for text
+    }
+  }
+
+  // Card footer styling
+  .card-footer {
+    display: flex; // Flex layout for footer
+    justify-content: space-between; // Space between buttons
+    padding: 0.5rem; // Padding for footer
+    background-color: $gray-light; // Light gray background for footer
+    border-bottom-left-radius: $border-radius; // Rounded corners for footer
+    border-bottom-right-radius: $border-radius; // Rounded corners for footer
+
+    // Button styling
+    button {
+      flex-grow: 1; // Buttons grow to fill space
+      margin-right: 0.5rem; // Space between buttons
+      padding: 0.5rem 1rem; // Padding for buttons
+      border-radius: $border-radius; // Rounded corners for buttons
+
+      &:hover {
+        opacity: 0.9; // Slight opacity change on hover
+      }
+
+      // Style for the "Ajouter au panier" button
+      &.btn-primary {
+        background-color: $blue; // Blue background
+        border-color: $blue; // Match border color
+
+        &:hover {
+          background-color: darken($blue, 10%); // Darker on hover
+        }
+      }
+
+      // Style for the "Rupture de stock" button
+      &.btn-secondary {
+        background-color: $red; // Red background for out of stock
+        border-color: $red; // Match border color
+
+        &:hover {
+          background-color: darken($red, 10%); // Darker on hover
+        }
+      }
+    }
+
+    // Last button without right margin
+    button:last-child {
+      margin-right: 0; // Remove margin for the last button
+    }
+  }
+}
+
+// Media queries for responsiveness
+@media (max-width: 768px) {
+  .card {
+    // Adjust card width on small screens
+    width: 100%; // Full width on small screens
+
+    .card-body {
+      // Stack layout for small screens
+      padding: 0.75rem; // Adjust padding for small screens
+    }
+
+    .card-footer {
+      flex-direction: column; // Stack buttons on small screens
+      button {
+        margin-bottom: 0.5rem; // Space between stacked buttons
+      }
+    }
+  }
+}
+
+// Additional utility classes for better alignment
+.text-center {
+  text-align: center; // Center alignment for text
+}
+
+.mt-2 {
+  margin-top: 0.5rem; // Small top margin utility
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem; // Small bottom margin utility
+}
+
+.btn {
+  transition: background-color 0.3s ease; // Smooth transition for button color changes
+}

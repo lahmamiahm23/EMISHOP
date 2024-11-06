@@ -1,30 +1,26 @@
-<div class="container mt-3">
-    <div class="col-md-6 offset-3">
-      <div class="card">
-        <div class="card-header">Authentification</div>
-        <div class="card-body">
-          <!-- Message d'erreur stylé -->
-          <div *ngIf="errormessage" class="alert alert-danger">{{ errormessage }}</div>
-          <!-- Formulaire réactif -->
-          <form [formGroup]="userFormGroup" (ngSubmit)="handleLogin()">
-            <div class="mb-3">
-              <label class="form-label">Username</label>
-              <input type="text" formControlName="username" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Password</label>
-              <input type="password" formControlName="password" class="form-control" required>
-            </div>
-            <div>
-              <!-- Désactiver le bouton si le formulaire est invalide -->
-              <button class="btn btn-primary" type="submit" [disabled]="userFormGroup.invalid">Login</button>
-            </div>
-          </form>
-          <div class="text-center mt-3">
-            <p class="mb-0">Don't have an account? <a routerLink="/signup">Sign Up</a></p>
-          </div>
+<h1>Login</h1>
 
-        </div>
-      </div>
-    </div>
+<div *ngIf="errorMessage" class="error-message">
+  <i class="bi bi-exclamation-circle"></i> {{ errorMessage }}
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" routerLink="/home">
+  <div class="position-relative">
+    <input type="text" placeholder="Email" formControlName="email" />
+    <i class="bi bi-envelope position-absolute email-icon"></i>
   </div>
+  <div class="position-relative">
+    <input type="password" placeholder="Password" formControlName="password" />
+    <i class="bi bi-lock position-absolute password-icon"></i>
+  </div>
+  <div>
+    <button type="submit">
+      <i class="bi bi-box-arrow-in-right"></i> Sign In
+    </button>
+  </div>
+</form>
+
+<!-- Link to Register -->
+<div class="text-center mt-3">
+  <p>Don't have an account? <a routerLink="/register" class="text-primary">Register here</a></p>
+</div>

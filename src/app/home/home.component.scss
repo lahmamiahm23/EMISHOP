@@ -1,8 +1,85 @@
-.nav-link {
-    transition: color 0.3s ease;
+.container {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa; // Light background color for contrast
+
+  // Logout/Login button styles
+  .text-end {
+    margin-bottom: 1rem;
+
+    .btn {
+      border-radius: 0.5rem;
+      transition: background-color 0.3s, transform 0.3s;
+      margin-left: 0.5rem;
+
+      &.btn-danger {
+        background-color: #dc3545; // Red background
+        border: none;
+
+        &:hover {
+          background-color: #c82333; // Darker red on hover
+          transform: translateY(-2px); // Subtle lift effect
+        }
+      }
+    }
   }
-  
-  .nav-link:hover {
-    color: #ffd700; /* Changement de couleur sur hover */
+
+  // Card styles
+  .row {
+    margin: 0;
+
+    .col-md-3 {
+      display: flex; // Flexbox for centering cards
+      justify-content: center;
+
+      .card {
+        width: 100%; // Full width of column
+        border: none;
+        border-radius: 0.5rem;
+        overflow: hidden; // Rounded corners
+        transition: box-shadow 0.3s;
+
+        &.shadow-sm {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        &:hover {
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Enhanced shadow on hover
+        }
+
+        .card-body {
+          background-color: #fff; // White background for cards
+          padding: 1.5rem;
+
+          .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff; // Blue text for titles
+
+            i {
+              color: #28a745; // Green color for icons
+            }
+          }
+
+          .card-text {
+            color: #6c757d; // Gray text for descriptions
+            margin-bottom: 1rem; // Space below the description
+          }
+
+          .btn {
+            background-color: #007bff; // Primary blue background
+            color: #fff; // White text
+            border: none;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s, transform 0.3s;
+
+            &:hover {
+              background-color: #0056b3; // Darker blue on hover
+              transform: translateY(-2px); // Subtle lift effect
+            }
+          }
+        }
+      }
+    }
   }
-  
+}

@@ -1,23 +1,27 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore'; // Import Firestore
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCec0RXB-OH-gf6lyvQXF3S4YdJ_MX2AoM",
-  authDomain: "emishop-e00f2.firebaseapp.com",
-  projectId: "emishop-e00f2",
-  storageBucket: "emishop-e00f2.appspot.com",
-  messagingSenderId: "600377032287",
-  appId: "1:600377032287:web:cd075a06186cbbfc3aa5ea",
-  measurementId: "G-EHGJB40H5N"
+  apiKey: "AIzaSyBj7xk319tY1VB9V5UUOK_PHpWT7-6G7Oc",
+  authDomain: "emishop-1068f.firebaseapp.com",
+  projectId: "emishop-1068f",
+  storageBucket: "emishop-1068f.appspot.com",
+  messagingSenderId: "360840662062",
+  appId: "1:360840662062:web:923769a645cfe1932923bf"
 };
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// Configuration de l'application
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }),
-     provideRouter(routes),
-     provideHttpClient()]
-     
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()) // Ajouter Firestore
+  ]
 };

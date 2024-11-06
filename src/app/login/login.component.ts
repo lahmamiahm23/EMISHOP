@@ -1,60 +1,41 @@
-import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
-import {  NgIf } from '@angular/common';
-import { AuthentificationService } from '../services/authentification.service';
-import { AppUser } from '../../Modeles/user.model';
-import { Router, RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [ReactiveFormsModule,  NgIf, RouterModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf, RouterLink],
 })
-export class LoginComponent {
-  userFormGroup!: FormGroup;
-  errormessage: string = ""; 
-  loading: boolean = false;  
+export class LogicComponent {
+  fb = inject(FormBuilder);
+  http = inject(HttpClient);
+  router = inject(Router);
+  authService = inject(AuthService);
 
-  constructor(
-    private fb: FormBuilder, 
-    private authService: AuthentificationService, 
-    private router: Router
-  ) {}
+  form = this.fb.nonNullable.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+  });
 
-  ngOnInit(): void {
-    this.userFormGroup = this.fb.group({
-      username: this.fb.control("", Validators.required),  // Ajout d'un validateur pour le nom d'utilisateur
-      password: this.fb.control("", Validators.required)   // Ajout d'un validateur pour le mot de passe
-    });
-  }
+  errorMessage: string | null = null;
 
-  handleLogin() {
-    this.loading = true;  // Activer l'indicateur de chargement
-    let username = this.userFormGroup.value.username;
-    let password = this.userFormGroup.value.password;
-  
-    this.authService.login(username, password).subscribe({
-      next: (appUser: AppUser) => {
-        this.authService.authentificateUser(appUser).subscribe({
-          next: () => {
-            this.loading = false;  // Désactiver le chargement après la réussite
-            console.log("Authentification réussie, redirection...");
-            this.router.navigateByUrl("/products");  // Redirection après authentification
-          },
-          error: (err) => {
-            this.loading = false;  // Désactiver le chargement en cas d'erreur
-            console.error("Erreur lors de l'authentification :", err);
-            this.errormessage = err.message;
-          }
-        });
-      },
-      error: (err) => {
-        this.loading = false;  // Désactiver le chargement en cas d'erreur
-        console.error("Login échoué :", err);
-        this.errormessage = "Login ou mot de passe incorrect";  // Affiche un message d'erreur clair
-      }
-    });
+  onSubmit(): void {
+    const rawForm = this.form.getRawValue();
+    this.authService.login(rawForm.email, rawForm.password)
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/products');
+        },
+        error: (err) => {
+          this.errorMessage = 'Login échoué. Veuillez vérifier votre email et mot de passe.';
+          console.error('Erreur lors de la connexion :', err);
+        },
+      });
   }
 }

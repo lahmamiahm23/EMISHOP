@@ -9,5 +9,4 @@
         stock: number;
         tags: string[];
         images:string[];
-      
 }
